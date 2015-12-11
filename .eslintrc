@@ -1,10 +1,5 @@
 {
-  "env": {
-    "phantom": true,
-    "browser": true
-  },
   "rules": {
-    "brace-style": [1, { "allowSingleLine": true }],
     "camelcase": 0,
     "comma-spacing": 0,
     "curly": 1,
