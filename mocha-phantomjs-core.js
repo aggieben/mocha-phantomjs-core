@@ -91,13 +91,10 @@ page.onError = function(msg, traces) {
 // Load the test page
 page.open(url)
 page.onInitialized = function() {
-    console.log('onInitialized');
-    page.injectJs('/Users/Benjamin/Projects/mocha-phantomjs-core/browser-shim.js');
-    page.injectJs('node_modules/babel-polyfill/dist/polyfill.min.js');
-    page.injectJs('node_modules/mocha/mocha.js');
+    page.injectJs(system.env['BROWSER_SHIM']);
+    page.injectJs(system.env['MOCHA']);
 }
 page.onResourceReceived = function(resource) {
-  console.log('onResourceReceived');
   if (resource.url.match(/mocha\.js$/)) {
     page.evaluate(function() {
       checkForMocha()
@@ -131,7 +128,6 @@ page.onCallback = function(data) {
     return true
 }
 page.onLoadFinished = function(status) {
-    console.log('onLoadFinished');
     page.onLoadFinished = null
     if (status !== 'success') {
         fail('Failed to load the page. Check the url: ' + url)
